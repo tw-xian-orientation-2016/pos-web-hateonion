@@ -55,7 +55,7 @@ function clearCart() {
 }
 
 function backButtonClick() {
-  $("name=['back']").click(function() {
+  $("[name='back']").click(function() {
     document.location.href = 'list.html';
-  })
+  });
 }
