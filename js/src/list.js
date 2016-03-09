@@ -16,6 +16,7 @@ function generatePage() {
     htmlContext += "<tr>";
     htmlContext += "<td>" + item.name + "</td>";
     htmlContext += "<td>" + "<button name='addButton' " + "data-itemId=" + item.id + " class='glyphicon glyphicon-plus'>" + "</button>" + "</td>";
+    htmlContext += "</tr>";
     $("table").append(htmlContext);
     updateNumber();
   });
@@ -65,7 +66,7 @@ function cartButtonClick() {
 }
 
 
-function cartButtonClick() {
+function receiptListButtonClick() {
   $("[name='receiptListButton']").click(function() {
     document.location.href = "receiptList.html";
   });
@@ -75,4 +76,5 @@ $(document).ready(function() {
   generateListPage();
   addButtonClick();
   cartButtonClick();
+  receiptListButtonClick();
 });
