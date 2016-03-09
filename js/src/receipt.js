@@ -1,6 +1,5 @@
 $(document).ready(function() {
   generateReceipt();
-  setReceipt();
   clearCart();
   backButtonClick();
 });
@@ -26,29 +25,13 @@ function generateReceipt() {
         htmlContext += "<td>" + item.price * cart.count + "</td>";
         htmlContext += "</tr>";
         $("table").append(htmlContext);
-        receiptList.push({id:cart.id, subtotal: item.price * cart.count});
+        receiptList.push({id:cart.id, subtotal: item.price * cart.count, count:cart.count});
       }
     });
   });
-}
-
-function setReceipt() {
-  var carts = getLocalStorage("carts");
-  var items = getLocalStorage("items");
-  var receiptList = getLocalStorage("receiptList");
-  var receipt = [];
-
-  carts.forEach(function(cart) {
-    items.forEach(function(item) {
-      if(cart.id === item.id) {
-        var subtotal = item.price * cart.count;
-        receipt.push({id: cart.id, subtotal: subtotal, count: cart.count});
-      }
-    });
-  });
-  receiptList.push(receipt);
   setLocalStorage("receiptList", receiptList);
 }
+
 
 function clearCart() {
   setLocalStorage("carts", []);
