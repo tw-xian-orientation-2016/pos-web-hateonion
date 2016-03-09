@@ -64,3 +64,10 @@ function checkOutClick() {
     document.location.href = 'receipt.html';
   });
 }
+
+function backButtonClick() {
+  $("[name='back']").click(function() {
+    document.location.href = 'list.html';
+  });
+}
+
