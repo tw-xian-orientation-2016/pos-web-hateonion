@@ -58,3 +58,9 @@ function updateNumber() {
     setLocalStorage("carts", carts);
   });
 }
+
+function checkOutClick() {
+  $("[name='checkout']").click(function() {
+    document.location.href = 'receipt.html';
+  });
+}
