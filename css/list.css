@@ -11,3 +11,10 @@ button.headerButton {
     display: inline-block;
 }
 
+header {
+    margin-bottom: 20px;
+}
+
+#detail {
+    font-size: 20px;
+}

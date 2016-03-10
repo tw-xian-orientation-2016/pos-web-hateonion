@@ -11,13 +11,13 @@
         <header class="row">
             <div class="col-xs-12">
                 <h1 id="shopTitle" class="text-center bg-primary">老司机商店</h1>
-                <button name="cartButton" class="headerButton pull-right btn btn-default glyphicon glyphicon-shopping-cart"></button>
-                <button name="receiptListButton" class="headerButton pull-right btn btn-default glyphicon glyphicon-gift"></button>
+                <button name="cartButton" data-toggle="tooltip" title="购物车" class="headerButton pull-right btn btn-default glyphicon glyphicon-shopping-cart"></button>
+                <button name="receiptListButton" data-toggle="tooltip" title="清单列表"class="headerButton pull-right btn btn-default glyphicon glyphicon-gift"></button>
             </div>
         </header>
         <div class="row">
             <div class="col-xs-12">
-                <table>
+                <table class="table table-borded table-hover" id="detail">
                     <tr>
                         <th>商品详情</th>
                         <th>单价</th>
@@ -27,8 +27,8 @@
             </div>
         </div>
     </div>
-
     <script src="js/lib/jquery-2.2.1.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/src/localStorageOperation.js"></script>
     <script src="js/src/list.js"></script>
 </body>

@@ -20,6 +20,10 @@ function generateCart() {
   });
 }
 
+function hoverEffect() {
+  $('[data-toggle="tooltip"]').tooltip();
+}
+
 function deleteButtonClick() {
   $("[name='deleteButton']").click(function() {
     var carts = getLocalStorage('carts');
@@ -66,6 +70,7 @@ function backButtonClick() {
 $(document).ready(function() {
   generateCart();
   deleteButtonClick();
+  hoverEffect();
   updateNumber();
   checkOutClick();
   backButtonClick();
