@@ -9,13 +9,14 @@ function generateTable(carts) {
         htmlContext += "<td>" + item.name + "</td>";
         htmlContext += "<td>" + item.price + "</td>";
         htmlContext += "<td>" + cart.count + "</td>";
-        htmlContext += "<td>" + item.price * cart.count + "</td>";
+        htmlContext += "<td>" + item.price * cart.count + "元</td>";
         htmlContext += "</tr>";
         $("table").append(htmlContext);
       }
     });
   });
 }
+
 
 function countTotal(carts) {
   var items = getLocalStorage("items");
@@ -31,9 +32,10 @@ function countTotal(carts) {
   return total;
 }
 
-function getGMTtime() {
+
+function getLocalTime() {
   var myDate = new Date();
-  var time = myDate.toGMTString();
+  var time = myDate.toLocaleString();
   return time;
 }
 
@@ -44,8 +46,8 @@ function getTimeStamp() {
 }
 
 function printTimeAndOperator() {
-  var time = getGMTtime();
-  $("#time").text("时间" + time);
+  var time = getLocalTime();
+  $("#time").text("时间:" + time);
   $("#operator").text("操作员：老司机");
 }
 
@@ -55,14 +57,24 @@ function printDetail() {
   var items = getLocalStorage("items");
   var receiptList = getLocalStorage("receiptList");
   var timeStamp = getTimeStamp();
+  var sumContext = "";
 
   if(tempCarts.length === 0){
     generateTable(carts);
     var total = countTotal(carts);
+    sumContext += "总计：";
+    sumContext += total;
+    sumContext += "元";
+    $("#totalMoney").text(sumContext);
     receiptList.push({time: timeStamp, total: total, carts: carts});
     setLocalStorage("receiptList", receiptList);
   } else{
+    var total2 = countTotal(tempCarts);
+    sumContext += "总计：";
+    sumContext += total2;
+    sumContext += "元";
     generateTable(tempCarts);
+    $("#totalMoney").text(sumContext);
     setLocalStorage("tempCarts", []);
   }
 }

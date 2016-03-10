@@ -49,7 +49,7 @@ function updateNumber() {
       }
     });
     $(this).parent().prevAll("#count").text(number);
-    $(this).parent().prevAll("#subtotal").text(number * price);
+    $(this).parent().prevAll("#subtotal").text(number * price + "元");
     setLocalStorage("carts", carts);
   });
 }
