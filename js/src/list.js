@@ -1,6 +1,7 @@
 function init() {
     $.getJSON("data/items.json", function(data){
       setLocalStorage("items", data);
+      setLocalStorage("tempCarts", []);
       setLocalStorage("carts", []);
       setLocalStorage("receiptList", []);
       generatePage();
