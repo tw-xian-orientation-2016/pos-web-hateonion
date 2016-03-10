@@ -1,9 +1,3 @@
-$(document).ready(function() {
-  backButtonClick();
-  printReceiptList();
-  getReciptButtonClick();
-  deleteButtonClick();
-});
 
 function printReceiptList(){
   var receiptList = getLocalStorage("receiptList");
@@ -57,3 +51,9 @@ function deleteButtonClick() {
     $(this).parents("tr").remove();
   });
 }
+$(document).ready(function() {
+  backButtonClick();
+  printReceiptList();
+  getReciptButtonClick();
+  deleteButtonClick();
+});
