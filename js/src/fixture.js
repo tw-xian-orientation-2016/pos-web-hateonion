@@ -8,3 +8,17 @@ function hasThisItemInCart(id) {
   });
   return index;
 }
+
+function countTotal(carts) {
+  var items = getLocalStorage("items");
+  var total = 0;
+
+  carts.forEach(function(cart) {
+    items.forEach(function(item) {
+      if(cart.id === item.id) {
+        total += item.price * cart.count;
+      }
+    });
+  });
+  return total;
+}
