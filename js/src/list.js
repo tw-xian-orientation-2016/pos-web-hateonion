@@ -17,6 +17,7 @@ function generatePage() {
     var htmlContext = "";
     htmlContext += "<tr>";
     htmlContext += "<td>" + item.name + "</td>";
+    htmlContext += "<td>" + item.price + "/" + item.unit;
     htmlContext += "<td>" + "<button name='addButton' " + "data-itemId=" + item.id + " class='glyphicon glyphicon-plus'>" + "</button>" + "</td>";
     htmlContext += "</tr>";
     $("table").append(htmlContext);
@@ -39,9 +40,9 @@ function updateNumber() {
   carts.forEach(function(cart) {
     number += cart.count;
   });
-  var cartNumber = "<div>" + number + "</div>";
+  var cartNumber = "<div class='shouNumber'>" + number + "</div>";
   $("[name='cartButton']").html(cartNumber);
-  var receiptNumber = "<div>" + receiptList.length + "</div>";
+  var receiptNumber = "<div class='shouNumber'>" + receiptList.length + "</div>";
   $("[name='receiptListButton']").html(receiptNumber);
 }
 

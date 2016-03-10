@@ -8,7 +8,7 @@ function generateCart() {
         var htmlContext = "";
         htmlContext += "<tr>";
         htmlContext += "<td>" + item.name + "</td>";
-        htmlContext += "<td>" + item.price + "</td>";
+        htmlContext += "<td>" + item.price + "/" + item.unit + "</td>";
         htmlContext += "<td>" + cart.count + "</td>";
         htmlContext += "<td>" + item.price * cart.count + "</td>";
         htmlContext += "<td>" + "<input type='text' name='numberInput'" + "data-itemId=" + item.id +  "></td>";
