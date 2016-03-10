@@ -51,31 +51,44 @@ function printTimeAndOperator() {
   $("#operator").text("操作员：老司机");
 }
 
-function printDetail() {
+function printTempCart() {
   var tempCarts = getLocalStorage("tempCarts");
+  var sumContext = "";
+
+  var total = countTotal(tempCarts);
+  sumContext += "总计：";
+  sumContext += total;
+  sumContext += "元";
+
+  generateTable(tempCarts);
+
+  $("#totalMoney").text(sumContext);
+  setLocalStorage("tempCarts", []);
+}
+
+function printCarts() {
   var carts = getLocalStorage("carts");
-  var items = getLocalStorage("items");
   var receiptList = getLocalStorage("receiptList");
   var timeStamp = getTimeStamp();
   var sumContext = "";
 
+  generateTable(carts);
+  var total = countTotal(carts);
+  sumContext += "总计：";
+  sumContext += total;
+  sumContext += "元";
+  $("#totalMoney").text(sumContext);
+  receiptList.push({time: timeStamp, total: total, carts: carts});
+  setLocalStorage("receiptList", receiptList);
+}
+
+function printDetail() {
+  var tempCarts = getLocalStorage("tempCarts");
+
   if(tempCarts.length === 0){
-    generateTable(carts);
-    var total = countTotal(carts);
-    sumContext += "总计：";
-    sumContext += total;
-    sumContext += "元";
-    $("#totalMoney").text(sumContext);
-    receiptList.push({time: timeStamp, total: total, carts: carts});
-    setLocalStorage("receiptList", receiptList);
+    printCarts();
   } else{
-    var total2 = countTotal(tempCarts);
-    sumContext += "总计：";
-    sumContext += total2;
-    sumContext += "元";
-    generateTable(tempCarts);
-    $("#totalMoney").text(sumContext);
-    setLocalStorage("tempCarts", []);
+    printTempCart();
   }
 }
 
