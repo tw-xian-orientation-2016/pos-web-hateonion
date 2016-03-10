@@ -1,22 +1,24 @@
 $(document).ready(function() {
+  backButtonClick();
   printReceiptList();
   getReciptButtonClick();
   deleteButtonClick();
-  backButtonClick();
 });
 
 function printReceiptList(){
   var receiptList = getLocalStorage("receiptList");
 
   receiptList.forEach(function(receipt) {
-        var htmlContext = "";
-        htmlContext += "<tr>";
-        htmlContext += "<td>" + receipt.time + "</td>";
-        htmlContext += "<td>" + receipt.total + "</td>";
-        htmlContext += "<td>" + "<button name='getReceipt' " + "data-timeStamp=" + receipt.time + " class='glyphicon glyphicon-gift'>" + "</button>" + "</td>";
-        htmlContext += "<td>" + "<button name='deleteReceipt' " + "data-timeStamp=" + receipt.time + " class='glyphicon glyphicon-gift'>" + "</button>" + "</td>";
-        htmlContext += "</tr>";
-        $("table").append(htmlContext);
+    var date = new Date(receipt.time);
+    var time = date.toDateString();
+    var htmlContext = "";
+    htmlContext += "<tr>";
+    htmlContext += "<td>" + time + "</td>";
+    htmlContext += "<td>" + receipt.total + "元</td>";
+    htmlContext += "<td>" + "<button name='getReceipt' " + "data-timeStamp=" + receipt.time + " class='btn btn-info glyphicon glyphicon-gift checkout'>" + "</button>" + "</td>";
+    htmlContext += "<td>" + "<button name='deleteReceipt' " + "data-timeStamp=" + receipt.time + " class='btn btn-warning glyphicon glyphicon-remove delete'>" + "</button>" + "</td>";
+    htmlContext += "</tr>";
+    $("table").append(htmlContext);
   });
 }
 
