@@ -4,6 +4,27 @@ $(document).ready(function() {
   backButtonClick();
 });
 
+function generateTable(carts) {
+  var items = getLocalStorage("items");
+
+  carts.forEach(function(cart) {
+    items.forEach(function(item) {
+      if(cart.id === item.id) {
+        var htmlContext = "";
+        htmlContext += "<tr>";
+        htmlContext += "<td>" + item.name + "</td>";
+        htmlContext += "<td>" + item.price + "</td>";
+        htmlContext += "<td>" + cart.count + "</td>";
+        htmlContext += "<td>" + item.price * cart.count + "</td>";
+        htmlContext += "</tr>";
+        $("table").append(htmlContext);
+        total += item.price * cart.count;
+      }
+    });
+  });
+}
+
+
 function generateReceipt() {
   var tempCarts = getLocalStorage("tempCarts");
   var carts = getLocalStorage("carts");
@@ -18,39 +39,12 @@ function generateReceipt() {
   $("#operator").text("操作员：老司机");
 
   if(tempCarts.length === 0){
-    carts.forEach(function(cart) {
-      items.forEach(function(item) {
-        if(cart.id === item.id) {
-          var htmlContext = "";
-          htmlContext += "<tr>";
-          htmlContext += "<td>" + item.name + "</td>";
-          htmlContext += "<td>" + item.price + "</td>";
-          htmlContext += "<td>" + cart.count + "</td>";
-          htmlContext += "<td>" + item.price * cart.count + "</td>";
-          htmlContext += "</tr>";
-          $("table").append(htmlContext);
-          total += item.price * cart.count;
-        }
-      });
-    });
+    generateTable(carts);
+
     receiptList.push({time: timeStamp, total: total, carts: carts});
     setLocalStorage("receiptList", receiptList);
   } else{
-    tempCarts.forEach(function(cart) {
-      items.forEach(function(item) {
-        if(cart.id === item.id) {
-          var htmlContext = "";
-          htmlContext += "<tr>";
-          htmlContext += "<td>" + item.name + "</td>";
-          htmlContext += "<td>" + item.price + "</td>";
-          htmlContext += "<td>" + cart.count + "</td>";
-          htmlContext += "<td>" + item.price * cart.count + "</td>";
-          htmlContext += "</tr>";
-          $("table").append(htmlContext);
-          total += item.price * cart.count;
-        }
-      });
-    });
+    generateTable(tempCarts);
     setLocalStorage("tempCarts", []);
   }
 }
