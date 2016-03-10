@@ -17,7 +17,7 @@ function generatePage() {
     var htmlContext = "";
     htmlContext += "<tr>";
     htmlContext += "<td>" + item.name + "</td>";
-    htmlContext += "<td>" + item.price + "/" + item.unit;
+    htmlContext += "<td>" + item.price + "元/" + item.unit;
     htmlContext += "<td>" + "<button name='addButton' data-toggle='tooltip' title='添加商品' " + "data-itemId=" + item.id + " class='btn btn-default glyphicon glyphicon-plus'>" + "</button>" + "</td>";
     htmlContext += "</tr>";
     $("table").append(htmlContext);

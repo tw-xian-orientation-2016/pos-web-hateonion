@@ -8,20 +8,16 @@ function generateCart() {
         var htmlContext = "";
         htmlContext += "<tr>";
         htmlContext += "<td>" + item.name + "</td>";
-        htmlContext += "<td>" + item.price + "/" + item.unit + "</td>";
+        htmlContext += "<td>" + item.price + "元/" + item.unit + "</td>";
         htmlContext += "<td>" + cart.count + "</td>";
-        htmlContext += "<td>" + item.price * cart.count + "</td>";
+        htmlContext += "<td>" + item.price * cart.count + "元</td>";
         htmlContext += "<td>" + "<input type='text' name='numberInput'" + "data-itemId=" + item.id +  "></td>";
-        htmlContext += "<td>" + "<button name='deleteButton' " + "data-itemId=" + item.id + " class='glyphicon glyphicon-remove'>" + "</button>" + "</td>";
+        htmlContext += "<td>" + "<button name='deleteButton' " + "data-itemId=" + item.id + " class='btn btn-default glyphicon glyphicon-remove pull-left'>" + "</button>" + "</td>";
         htmlContext += "</tr>";
         $("table").append(htmlContext);
       }
     });
   });
-}
-
-function hoverEffect() {
-  $('[data-toggle="tooltip"]').tooltip();
 }
 
 function deleteButtonClick() {
@@ -70,7 +66,6 @@ function backButtonClick() {
 $(document).ready(function() {
   generateCart();
   deleteButtonClick();
-  hoverEffect();
   updateNumber();
   checkOutClick();
   backButtonClick();
