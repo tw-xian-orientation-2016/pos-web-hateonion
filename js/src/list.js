@@ -1,17 +1,24 @@
+$(document).ready(function() {
+  generateListPage();
+  addButtonClick();
+  hoverEffect();
+  cartButtonClick();
+  receiptListButtonClick();
+});
 
 function init() {
-    $.getJSON("data/items.json", function(data){
-      setLocalStorage("items", data);
-      setLocalStorage("tempCarts", []);
-      setLocalStorage("carts", []);
-      setLocalStorage("receiptList", []);
-      generatePage();
-      addButtonClick();
-      updateNumber();
-    });
+  $.getJSON("data/items.json", function(data){
+    setLocalStorage("items", data);
+    setLocalStorage("tempCarts", []);
+    setLocalStorage("carts", []);
+    setLocalStorage("receiptList", []);
+    printDetail();
+    addButtonClick();
+    updateNumber();
+  });
 }
 
-function generatePage() {
+function printDetail() {
   var items = getLocalStorage("items");
   items.forEach(function(item) {
     var htmlContext = "";
@@ -29,7 +36,7 @@ function generateListPage() {
   if(!localStorage.items){
     init();
   } else{
-    generatePage();
+    printDetail();
   }
 }
 
@@ -40,26 +47,32 @@ function updateNumber() {
   carts.forEach(function(cart) {
     number += cart.count;
   });
-  var cartNumber = "<div class='shouNumber'>" + number + "</div>";
+  var cartNumber = '<div class="shouNumber">' + number + "</div>";
   $("[name='cartButton']").html(cartNumber);
   var receiptNumber = "<div class='shouNumber'>" + receiptList.length + "</div>";
   $("[name='receiptListButton']").html(receiptNumber);
 }
 
+function hasThisItemInCart(id) {
+  var carts = getLocalStorage('carts');
+  var index;
+  carts.forEach(function(cart, currentIndex) {
+    if(cart.id === id) {
+      index = currentIndex;
+    }
+  });
+  return index;
+}
+
 function addButtonClick() {
   $("[name='addButton']").click(function() {
-    var id = $(this).attr("data-itemId");
-    var carts = getLocalStorage("carts");
-    var index;
-    carts.forEach(function(cart, currentIndex) {
-      if(cart.id === id) {
-        index = currentIndex;
-      }
-    });
-    if(index === undefined) {
-      carts.push({"id" : id, "count" : 1});
-    } else {
+    var id = $(this).attr('data-itemId');
+    var carts = getLocalStorage('carts');
+    if(hasThisItemInCart(id)!== undefined) {
+      var index = hasThisItemInCart(id);
       carts[index].count++;
+    } else{
+      carts.push({"id" : id, "count" : 1});
     }
     setLocalStorage("carts", carts);
     updateNumber();
@@ -82,10 +95,3 @@ function receiptListButtonClick() {
   });
 }
 
-$(document).ready(function() {
-  generateListPage();
-  addButtonClick();
-  hoverEffect();
-  cartButtonClick();
-  receiptListButtonClick();
-});
