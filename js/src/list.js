@@ -34,7 +34,11 @@ function generateListPage() {
 function updateNumber() {
   var receiptList = getLocalStorage("receiptList");
   var carts = getLocalStorage("carts");
-  var cartNumber = "<div>" + carts.length + "</div>";
+  var number= 0;
+  carts.forEach(function(cart) {
+    number += cart.count;
+  });
+  var cartNumber = "<div>" + number + "</div>";
   $("[name='cartButton']").html(cartNumber);
   var receiptNumber = "<div>" + receiptList.length + "</div>";
   $("[name='receiptListButton']").html(receiptNumber);
