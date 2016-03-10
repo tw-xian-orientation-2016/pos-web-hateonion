@@ -1,3 +1,4 @@
+
 function init() {
     $.getJSON("data/items.json", function(data){
       setLocalStorage("items", data);

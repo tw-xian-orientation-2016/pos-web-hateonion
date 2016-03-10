@@ -1,11 +1,3 @@
-$(document).ready(function() {
-  generateCart();
-  deleteButtonClick();
-  updateNumber();
-  checkOutClick();
-  backButtonClick();
-});
-
 function generateCart() {
   var items = getLocalStorage("items");
   var carts = getLocalStorage("carts");
@@ -71,3 +63,10 @@ function backButtonClick() {
   });
 }
 
+$(document).ready(function() {
+  generateCart();
+  deleteButtonClick();
+  updateNumber();
+  checkOutClick();
+  backButtonClick();
+});
