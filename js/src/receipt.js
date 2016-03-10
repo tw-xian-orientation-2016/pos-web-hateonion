@@ -10,6 +10,8 @@ function generateReceipt() {
   var receiptList = getLocalStorage("receiptList");
   var myDate = new Date();
   var time = myDate.toGMTString();
+  var timeStamp = myDate.getTime();
+  var total = 0;
 
   $("#time").text("时间" + time);
   $("#operator").text("操作员：老司机");
@@ -25,10 +27,11 @@ function generateReceipt() {
         htmlContext += "<td>" + item.price * cart.count + "</td>";
         htmlContext += "</tr>";
         $("table").append(htmlContext);
-        receiptList.push({id:cart.id, subtotal: item.price * cart.count, count:cart.count});
+        total += item.price * cart.count;
       }
     });
   });
+  receiptList.push({time: timeStamp, total: total, carts: carts});
   setLocalStorage("receiptList", receiptList);
 }
 
